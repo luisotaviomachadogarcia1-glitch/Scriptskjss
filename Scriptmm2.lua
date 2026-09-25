@@ -793,3 +793,30 @@ local function createMenu()
     end)
 
     UIS.InputBegan:Connect(function(i, gp)
+        if not gp and i.KeyCode == Enum.KeyCode.Insert then
+            mf.Visible = not mf.Visible
+            ob.Visible = not mf.Visible
+        end
+    end)
+end
+
+-- ==================== INICIALIZAÇÃO ====================
+
+pcall(setupInfiniteJump)
+pcall(setupNoClip)
+pcall(setupAimbot)
+pcall(setupESP)
+pcall(createMenu)
+
+pcall(function()
+    LP.CharacterAdded:Connect(function(ch)
+        local h = ch:WaitForChild("Humanoid", 10)
+        if h then
+            h.WalkSpeed = Config.WalkSpeed
+            h.JumpPower = Config.JumpPower
+            h.UseJumpPower = true
+        end
+    end)
+end)
+
+print("[Universal Script v2] Carregado!")
